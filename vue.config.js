@@ -1,5 +1,8 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
+const AutoImport = require("unplugin-auto-import/webpack");
+const Components = require("unplugin-vue-components/webpack");
+const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
 
 // Generate pages object
 const pagesObj = {};
@@ -17,21 +20,27 @@ chromeName.forEach(name => {
 const plugins =
   process.env.NODE_ENV === "production"
     ? [
-        {
-          from: path.resolve("src/manifest.production.json"),
-          to: `${path.resolve("dist")}/manifest.json`
-        }
-      ]
+      {
+        from: path.resolve("src/manifest.production.json"),
+        to: `${path.resolve("dist")}/manifest.json`
+      }
+    ]
     : [
-        {
-          from: path.resolve("src/manifest.development.json"),
-          to: `${path.resolve("dist")}/manifest.json`
-        }
-      ];
+      {
+        from: path.resolve("src/manifest.development.json"),
+        to: `${path.resolve("dist")}/manifest.json`
+      }
+    ];
 
 module.exports = {
   pages: pagesObj,
   configureWebpack: {
-    plugins: [CopyWebpackPlugin(plugins)]
+    plugins: [CopyWebpackPlugin(plugins),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),]
   }
 };
