@@ -1,23 +1,53 @@
 <template>
   <div class="main_app">
-    <h1>Hello popup</h1>
-    <el-button type="primary">Primary</el-button>
+    <el-input class="source" v-model="sourceValue" :rows="5" type="textarea" placeholder="Please input" />
+    <el-button class="send" type="primary" @click="send">ChangeToCamel</el-button>
+    <el-input class="destination" v-model="destinationValue" :rows="5" type="textarea" placeholder="Please input" />
   </div>
 </template>
 
 <script>
+import { convertToCamel } from '@/api'
 export default {
   name: 'app',
+  data() {
+    return {
+      url: "http://localhost:8899/Tool/ConvertToCamel",
+      sourceValue: '',
+      destinationValue: ''
+    }
+  },
+  methods: {
+    send() {
+      convertToCamel({
+        jsonStr: this.sourceValue
+      })
+        .then(res => {
+          console.log(res)
+          this.destinationValue = JSON.stringify(res);
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+  },
 }
 </script>
 
 <style>
 .main_app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.send {
+  margin: 5px;
+}
+
+.source {
+  width: 200px;
+}
+
+.destination {
+  width: 200px;
 }
 </style>
