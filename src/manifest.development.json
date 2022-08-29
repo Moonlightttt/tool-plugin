@@ -8,6 +8,26 @@
         "default_popup": "popup.html"
     },
     "content_security_policy": {
-        "extension_pages":"script-src 'self' ; object-src 'self'"
-    }
+        "extension_pages": "script-src 'self' ; object-src 'self'"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.hupu.com/*"
+            ],
+            "css": [
+                "css/hide-hupu-title.css"
+            ],
+            "js": []
+        },
+        {
+            "matches": [
+                "https://*.zhihu.com/*"
+            ],
+            "css": [
+                "css/hide-zhihu-title.css"
+            ],
+            "js": []
+        }
+    ]
 }

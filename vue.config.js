@@ -33,6 +33,16 @@ const plugins = isProduction
     }
   ];
 
+plugins.push({
+  from: path.resolve("src/css/hide-hupu-title.css"),
+  to: `${path.resolve("dist")}/css/hide-hupu-title.css`
+});
+
+plugins.push({
+  from: path.resolve("src/css/hide-zhihu-title.css"),
+  to: `${path.resolve("dist")}/css/hide-zhihu-title.css`
+});
+
 module.exports = {
   pages: pagesObj,
   configureWebpack: {
