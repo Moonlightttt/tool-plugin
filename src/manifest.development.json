@@ -13,19 +13,11 @@
     "content_scripts": [
         {
             "matches": [
-                "https://*.hupu.com/*"
-            ],
-            "css": [
-                "css/hide-hupu-title.css"
-            ],
-            "js": []
-        },
-        {
-            "matches": [
+                "https://*.hupu.com/*",
                 "https://*.zhihu.com/*"
             ],
             "css": [
-                "css/hide-zhihu-title.css"
+                "css/hide-title.css"
             ],
             "js": []
         }
